@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Link Safety Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Link Safety Checker</h1>
+        <form method="post" action="/">
+            <label for="link">Enter a link:</label><br>
+            <input type="text" id="link" name="link" required><br>
+            <button type="submit">Check</button>
+        </form>
+        {% if overall_safety is not none %}
+            <p class="overall-safety {{ 'safe' if overall_safety else 'unsafe' }}">
+                Overall Safety: {{ 'Safe' if overall_safety else 'Unsafe' }} -
+                <span style="color: {{ link_color }}">{{ request.form['link'] }}</span>
+            </p>
+            <div class="results">
+                <h2>Results:</h2>
+                {% for feature, result in results.items() %}
+                    <p>{{ feature }}: {{ 'Safe' if result else 'Unsafe' }}</p>
+                {% endfor %}
+            </div>
+            <div class="feedback">
+                <form method="post" action="/feedback" id="feedback-form">
+                    <h2>Feedback</h2>
+                    <label for="feedback">Your feedback:</label><br>
+                    <textarea id="feedback" name="feedback" required></textarea><br>
+                    <button type="submit">Submit Feedback</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
