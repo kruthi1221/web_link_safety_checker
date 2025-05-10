@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thank You</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Link Safety Checker</h1>
+    {% if thank_you %}
+      <p class="thank-you" id="thank-you">Thank you for your feedback!</p>
+    {% endif %}
+    <a href="/">Go back to home</a>
+  </div>
+</body>
+</html>
